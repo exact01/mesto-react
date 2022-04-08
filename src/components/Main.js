@@ -1,9 +1,25 @@
+import { useState, useEffect } from "react";
 import pencil from '../images/profile__settings.png'
 import plus from '../images/profile__add-button.svg'
 import Card from './Card';
+import api from "../utils/Api.js";
 
-function Main(props) {
-  const { onOpenEditProfilePopup, onEditAvatarPopup, onAddPlace, userData, cards, onCardClick } = props;
+
+
+
+function Main({ onOpenEditProfilePopup, onEditAvatarPopup, onAddPlace, onCardClick }) {
+
+  const [userData, setUserData] = useState("");
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api.getUserProfile().then((res) => setUserData(res)).catch((e) => { console.log(e) });
+  }, []); //запрос на добавление данных о профиле
+
+  useEffect(() => {
+    api.getInitialCards().then((res) => setCards(res)).catch((e) => { console.log(e) });
+  }, []); // запрос на добавления карточек
+
   return (
     <main>
       <section className="profile">
@@ -33,7 +49,7 @@ function Main(props) {
         </button>
       </section>
       <section className="card-grid">{cards.map((card) => (
-        <Card card={card} onCardClick={onCardClick} />
+        <Card card={card} onCardClick={onCardClick} key={card._id} />
       )
       )}</section>
     </main>
