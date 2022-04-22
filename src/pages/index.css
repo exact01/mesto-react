@@ -35,6 +35,7 @@
 @import url(../blocks/card-grid/button-remove-card/card-grid__button-remove-card.css);
 @import url(../blocks/card-grid/__like-counter/card-grid__like-counter.css);
 @import url(../blocks/card-grid/__like-item/card-grid__like-item.css);
+@import url(../blocks/card-grid/button-remove-card/_hiden/card-grid__button-remove-card_hidden.css);
 
 /* block footer */
 @import url(../blocks/footer/footer.css);
