@@ -3,7 +3,6 @@ import pencil from '../images/profile__settings.png'
 import plus from '../images/profile__add-button.svg'
 import Card from './Card';
 import { CurrentUserContext } from "../context/CurrentUserContext.js"
-import api from "../utils/Api";
 
 
 
