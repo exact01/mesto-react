@@ -45,7 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       >
         <fieldset className="popup__set">
           <input
-            value={name}
+            value={name || ''}
             onChange={handleChangeName}
             className="popup__input-profile"
             type="text"
@@ -61,7 +61,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             </span>
           </div>
           <input
-            value={description}
+            value={description || ''}
             onChange={handleChangeDescription}
             type="text"
             name="profession"

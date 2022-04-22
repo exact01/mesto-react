@@ -83,7 +83,8 @@ function App() {
 
 
   function handleAddPlaceSubmit(data) {
-    api.getNewCard(data).then((newCard) => setCards([newCard, ...cards])).catch(e => console.log(e));
+    api.getNewCard(data).then((newCard) => setCards([newCard, ...cards])).catch(e => console.log(e)); 
+    closeAllPopups();
   }
 
 
