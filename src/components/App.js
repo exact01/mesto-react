@@ -15,18 +15,18 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null)
+  const [selectedCard, setSelectedCard] = useState(false)
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
 
   useEffect(() => {
-    api.getUserProfile().then((res) => setCurrentUser(res)).catch((e) => { console.log(e) });
+    api.getUserProfile().then(setCurrentUser).catch((e) => { console.log(e) });
   }, []); //запрос на добавление данных о профиле 
 
 
   useEffect(() => {
-    api.getInitialCards().then((res) => setCards(res)).catch((e) => { console.log(e) });
+    api.getInitialCards().then(setCards).catch((e) => { console.log(e) });
   }, []); // запрос на добавления карточек
 
 
@@ -64,27 +64,30 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function closeAllPopups(selector) {
+  function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(null);
+    setSelectedCard(false);
   }
 
   function handleUpdateUser(data) {
-    api.setUserProfile(data).then(data => setCurrentUser(data)).catch(e => console.log(e))
-    closeAllPopups();
+    api.setUserProfile(data)
+      .then(data => setCurrentUser(data), closeAllPopups())
+      .catch(e => console.log(e))
   }
 
   function handleUpdateAvatar(data) {
-    api.updateAvatar(data.avatar).then(data => setCurrentUser(data)).then(e => console.log(e))
-    closeAllPopups();
+    api.updateAvatar(data.avatar)
+      .then(data => setCurrentUser(data), closeAllPopups())
+      .then(e => console.log(e))
   }
 
 
   function handleAddPlaceSubmit(data) {
-    api.getNewCard(data).then((newCard) => setCards([newCard, ...cards])).catch(e => console.log(e)); 
-    closeAllPopups();
+    api.getNewCard(data)
+      .then((newCard) => setCards([newCard, ...cards]), closeAllPopups())
+      .catch(e => console.log(e));
   }
 
 
@@ -94,7 +97,7 @@ function App() {
     <div className="page">
       <Header />
       <CurrentUserContext.Provider
-        value={{ currentUser, cards, setCards }}
+        value={{ currentUser }}
       >
         <Main
           onOpenEditProfilePopup={handleEditProfileClick}
@@ -103,6 +106,7 @@ function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
+          cards={cards}
         />
       </CurrentUserContext.Provider>
       <Footer />

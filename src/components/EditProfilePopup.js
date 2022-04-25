@@ -10,7 +10,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about)
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -32,7 +32,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   }
   return (
-    <>
       <PopupWithForm
         onClose={onClose}
         popupSelector="edit"
@@ -80,7 +79,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           </div>
         </fieldset>
       </PopupWithForm>
-    </>
   )
 }
 

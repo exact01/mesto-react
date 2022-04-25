@@ -37,7 +37,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard }) {
       >
         <fieldset className="popup__set">
           <input
-            defaultValue=''
+            value={name || ''}
             onChange={handleChangeNameLink}
             type="text"
             name="name"
@@ -54,7 +54,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard }) {
             ></span>
           </div>
           <input
-            defaultValue=''
+            value={link || ''}
             onChange={handleChangeLink}
             type="url"
             name="link"

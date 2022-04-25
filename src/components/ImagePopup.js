@@ -1,9 +1,9 @@
 import closeIcon from "../images/popup__close-icon.svg";
 
 function ImagePopup({ onClose, card }) {
-
-  return card && (
-    <div className="popup popup_type_image popup_opened">
+  const opened = card ? "popup_opened" : "";
+  return (
+    <div className={`popup popup_type_image ${opened}`}>
       <div className="popup__container popup__container_image">
         <button className="popup__button-close" name="close" type="button" onClick={onClose}>
           <img

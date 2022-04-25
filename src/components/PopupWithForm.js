@@ -3,7 +3,7 @@ import closeIcon from "../images/popup__close-icon.svg";
 function PopupWithForm({ onClose, popupSelector, children, title, isOpen, buttonText, formName, onSubmit, classNameForm }) {
   const opened = isOpen ? "popup_opened" : "";
   return (
-    <div className={`popup popup_type_${popupSelector} ${opened}`}>
+    <div className={`popup popup_type_${popupSelector} ${opened}`} >
       <div className="popup__container">
         <button className="popup__button-close" name="close" type="button" onClick={onClose}>
           <img

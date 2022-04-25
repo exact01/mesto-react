@@ -1,3 +1,5 @@
+import ImagePopup from "./ImagePopup";
+
 function Card({ card, onCardClick, currentUser, onCardLike, onCardDelete }) {
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser._id;
@@ -8,30 +10,32 @@ function Card({ card, onCardClick, currentUser, onCardLike, onCardDelete }) {
 
   const cardLikeButtonClassName = `card-grid__like ${isLiked ? "card-grid__like_activate" : ""}`
 
-  function handleClick() {
+  function handleClick(card) {
     onCardClick(card);
   }
 
-  function handleLikeCard(){
+  function handleLikeCard() {
     onCardLike(card);
   }
 
-  function handleDeleteClick(){
+  function handleDeleteClick() {
     onCardDelete(card)
   }
 
   return (
-    <div className="card-grid__item" key={card._id}>
-      <img src={card.link} className="card-grid__image" alt="#" onClick={handleClick} />
-      <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}></button>
-      <div className="card-grid__block">
-        <h2 className="card-grid__subtitle">{card.name}</h2>
-        <div className="card-grid__like-item">
-          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeCard}></button>
-          <div className="card-grid__like-counter">{card.likes.length}</div>
+   
+      <div className="card-grid__item" key={card._id}>
+        <img src={card.link} className="card-grid__image" alt="#" onClick={() => handleClick(card)} />
+        <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}></button>
+        <div className="card-grid__block">
+          <h2 className="card-grid__subtitle">{card.name}</h2>
+          <div className="card-grid__like-item">
+            <button type="button" className={cardLikeButtonClassName} onClick={handleLikeCard}></button>
+            <div className="card-grid__like-counter">{card.likes.length}</div>
+          </div>
         </div>
       </div>
-    </div>
+
   );
 };
 
